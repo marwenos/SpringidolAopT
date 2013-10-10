@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+<context:annotation-config></context:annotation-config>
+<context:component-scan base-package="com.springIdol.aopTest"></context:component-scan>
+<aop:aspectj-autoproxy/>
+<util:list id = "c_pool_list">
+<value>VERY BAD PERFORMENCE , I DONT KNOW WHY THE FUCK ARE YOU HERE DUDE</value>
+<value>YOU CAN GET THE AVERAGE , BUT NEXT TIME YOU SHOULD BLOW US WITH A BETTER PERFORMENCE , I KNOW YOU VAN DO IT</value>
+<value>GOOD PERFORMENCE !</value>
+<value>FUCKIN AMAZING ! ARE YOU A FUCKIN ALIAN !!!!! I AM VERY IMPRESSED !!</value>
+</util:list>
+<bean id = "John" class = "com.springIdol.aopTest.entities.SaloonSinger" p:song-ref="CSong" p:name="John"></bean>
+<bean id = "CSong" class = "com.springIdol.aopTest.entities.CountrySong"></bean>
+<bean id = "audience" class = "com.springIdol.aopTest.aspects.Audience"></bean>
+<bean id="thinker" class="com.springIdol.aopTest.entities.Volunteer"></bean>
+<bean id = "magicien" class = "com.springIdol.aopTest.aspects.Magicien"></bean>
+<bean id = "criticism_impl" class = "com.springIdol.aopTest.entities.CriticismPoolImpl">
+<property name="criticismPool" ref="c_pool_list"></property>
+</bean>
+<!-- 
+<bean id = "magicien" class = "com.springIdol.aopTest.entities.Magicien"></bean>
+
+<aop:config>
+<aop:aspect ref="audience">
+<aop:pointcut expression="execution ( * com.springIdol.aopTest.contract.Singer.sing(..) ) and within (com.springIdol.aopTest.entities.*) and args(java.lang.String) and target (com.springIdol.aopTest.entities.SaloonSinger)" id="p"/>
+ -->
+<!-- You can use the after returning and before and after throwing ...
+<aop:after-returning pointcut-ref="p" method="applaud"/>
+<aop:before pointcut-ref="p" method = "takeSits" />
+ -->
+ <!-- You can use also the arround advice -->
+ <!-- 
+ <aop:around pointcut-ref="p" method="watchPerformence"/>
+</aop:aspect>
+<aop:aspect>
+<aop:declare-parents types-matching="com.springIdol.aopTest.contract.Singer" implement-interface="com.springIdol.aopTest.contract.Performer" default-impl="com.springIdol.aopTest.entities.StagePerformer"/>
+</aop:aspect>
+</aop:config>
+ -->
+</beans>
